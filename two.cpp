@@ -5,9 +5,9 @@ struct State {
     int r, c;
     vector<pair<int,int>> visitedGoals;
     vector<string> actions;
-    int g; // هزینه واقعی
+    int g;
     int time;
-    int f; // g + h
+    int f;
     bool operator>(const State& other) const {
         return f > other.f;
     }
@@ -105,7 +105,6 @@ void informed_search_with_log() {
             auto [entry_cost, wait_time] = analyze_cell(cell, cur.time);
 
             State prev = cur;
-            // STAY دقیقه‌ای برای چراغ قرمز
             for(int w=0; w<wait_time; ++w){
                 State stayState = prev;
                 stayState.actions.push_back("STAY");
@@ -117,7 +116,6 @@ void informed_search_with_log() {
                 prev = stayState;
             }
 
-            // حرکت نهایی به خانه
             State next = prev;
             next.r = nr; next.c = nc;
             next.actions.push_back(mvName);
